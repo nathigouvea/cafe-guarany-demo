@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Guarany Porto — Since 1933</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F5F0E8;
+      --brown: #2C1810;
+      --brown-mid: #4A2C1A;
+      --gold: #C9A84C;
+      --gold-light: #E2C47A;
+      --white: #FAFAF7;
+      --text-body: #3D2B1F;
+      --text-muted: #7A6050;
+      --border: rgba(44, 24, 16, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      color: var(--text-body);
+      background-color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* =============================================
+       HEADER / NAV
+    ============================================= */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .site-header.scrolled {
+      background: var(--brown);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 20px rgba(44, 24, 16, 0.3);
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-main {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .logo-sub {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.85);
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-reserve {
+      background: var(--gold);
+      color: var(--brown) !important;
+      padding: 0.55rem 1.2rem;
+      border-radius: 1px;
+      font-weight: 700 !important;
+      letter-spacing: 0.15em !important;
+      transition: background 0.3s, transform 0.2s !important;
+    }
+
+    .nav-reserve:hover {
+      background: var(--gold-light) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Mobile hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1800&q=85&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.05);
+      transition: transform 6s ease;
+    }
+
+    .hero:hover .hero-bg { transform: scale(1.0); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(44, 24, 16, 0.72) 0%,
+        rgba(44, 24, 16, 0.45) 50%,
+        rgba(44, 24, 16, 0.68) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s ease forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.08;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s ease forwards;
+    }
+
+    .hero-title span {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      color: rgba(250, 250, 247, 0.8);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s ease forwards;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s ease forwards;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--brown);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border: 2px solid var(--gold);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border: 1px solid rgba(250, 250, 247, 0.5);
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(250, 250, 247, 0.5);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(to bottom, transparent, rgba(201, 168, 76, 0.6));
+    }
+
+    /* =============================================
+       SECTION COMMON
+    ============================================= */
+    section { position: relative; }
+
+    .section-pad {
+      padding: 7rem 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--brown-mid);
+    }
+
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    .divider-center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    .about {
+      background: var(--cream);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      width: 55%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      bottom: -3rem;
+      right: -3rem;
+      border: 6px solid var(--white);
+      box-shadow: 0 10px 40px rgba(44, 24, 16, 0.15);
+    }
+
+    .about-year-badge {
+      position: absolute;
+      top: -1.5rem;
+      left: -1.5rem;
+      width: 90px;
+      height: 90px;
+      background: var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--brown);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .about-year-badge .year {
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .about-year-badge .since {
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .about-text p {
+      color: var(--text-body);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      background: rgba(201, 168, 76, 0.07);
+    }
+
+    .about-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--brown-mid);
+      line-height: 1.5;
+      margin: 0 !important;
+    }
+
+    .about-facts {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .fact {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fact-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .fact-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    /* =============================================
+       EXPERIENCE
+    ============================================= */
+    .experience {
+      background: var(--white);
+    }
+
+    .experience-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .exp-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .exp-card-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .exp-card:hover .exp-card-img { transform: scale(1.05); }
+
+    .exp-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 24, 16, 0.85) 0%, rgba(44, 24, 16, 0.1) 60%);
+      transition: background 0.4s ease;
+    }
+
+    .exp-card:hover .exp-card-overlay {
+      background: linear-gradient(to top, rgba(44, 24, 16, 0.92) 0%, rgba(44, 24, 16, 0.25) 60%);
+    }
+
+    .exp-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      transform: translateY(0);
+      transition: transform 0.4s ease;
+    }
+
+    .exp-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .exp-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-card-desc {
+      font-size: 0.88rem;
+      color: rgba(250, 250, 247, 0.75);
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .exp-card:hover .exp-card-desc {
+      max-height: 100px;
+      opacity: 1;
+    }
+
+    /* =============================================
+       MENU
+    ============================================= */
+    .menu-section {
+      background: var(--cream);
+    }
+
+    .menu-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-tab {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.8rem 1.8rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      margin-bottom: -1px;
+    }
+
+    .menu-tab:hover { color: var(--brown); }
+    .menu-tab.active {
+      color: var(--brown);
+      border-bottom-color: var(--gold);
+    }
+
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .menu-item {
+      padding: 1.4rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+
+    .menu-item:hover { background: rgba(201, 168, 76, 0.05); }
+
+    .menu-item-left { flex: 1; }
+
+    .menu-item-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--brown);
+      margin-bottom: 0.2rem;
+    }
+
+    .menu-item-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .menu-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .menu-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* =============================================
+       GALLERY
+    ============================================= */
+    .gallery {
+      background: var(--brown);
+      padding: 7rem 0;
+    }
+
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 0 2rem;
+    }
+
+    .gallery-header .section-label { color: var(--gold-light); }
+    .gallery-header .section-title { color: var(--white); }
+    .gallery-header .divider { background: var(--gold); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 6px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.07); }
+
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: 1/1; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+
+    .gallery-item:not(:nth-child(1)):not(:nth-child(4)):not(:nth-child(5)) {
+      aspect-ratio: 1/1;
+    }
+
+    .gallery-item:nth-child(4),
+    .gallery-item:nth-child(5) {
+      aspect-ratio: 16/9;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 24, 16, 0);
+      transition: background 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      background: rgba(44, 24, 16, 0.35);
+    }
+
+    .gallery-overlay-icon {
+      color: var(--white);
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* =============================================
+       VISIT / CONTACT
+    ============================================= */
+    .visit {
+      background: var(--white);
+    }
+
+    .visit-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .visit-info {}
+
+    .contact-list {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .contact-list li:first-child { border-top: 1px solid var(--border); }
+
+    .contact-icon {
+      font-size: 1.1rem;
+      color: var(--gold);
+      width: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .contact-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--brown);
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+    }
+
+    .hours-day { color: var(--text-muted); }
+    .hours-time { color: var(--brown); font-weight: 700; }
+
+    .map-container {
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(44, 24, 16, 0.12);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+    }
+
+    /* =============================================
+       CTA BAND
+    ============================================= */
+    .cta-band {
+      background: var(--gold);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .cta-band-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-band-sub {
+      font-size: 0.9rem;
+      color: var(--brown-mid);
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .btn-dark {
+      background: var(--brown);
+      color: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 2px solid var(--brown);
+      display: inline-block;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+
+    .btn-dark:hover {
+      background: transparent;
+      color: var(--brown);
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .site-footer {
+      background: var(--brown);
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(250, 250, 247, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .logo-main { font-size: 1.4rem; margin-bottom: 0.3rem; }
+    .footer-brand .logo-sub { margin-bottom: 1.2rem; }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(250, 250, 247, 0.55);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col-title {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(250, 250, 247, 0.6);
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .footer-social {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(250, 250, 247, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(250, 250, 247, 0.6);
+      font-size: 0.85rem;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+
+    .social-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(250, 250, 247, 0.35);
+    }
+
+    .footer-badge {
+      font-size: 0.72rem;
+      color: rgba(250, 250, 247, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-badge a {
+      color: var(--gold);
+      transition: color 0.3s;
+    }
+
+    .footer-badge a:hover { color: var(--gold-light); }
+
+    /* =============================================
+       ANIMATIONS
+    ============================================= */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img-accent { right: 0; bottom: -2rem; }
+      .experience-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5) { grid-column: span 1; aspect-ratio: 1/1; }
+      .visit-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .section-pad { padding: 5rem 1.5rem; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+      .about-facts { gap: 1.5rem; }
+      .hero-cta-group { flex-direction: column; align-items: center; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* =============================================
+       MOBILE NAV
+    ============================================= */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(320px, 100vw);
+      height: 100vh;
+      background: var(--brown);
+      z-index: 999;
+      padding: 6rem 2.5rem 2.5rem;
+      transition: right 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-menu.open { right: 0; }
+
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--white);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(250, 250, 247, 0.08);
+      transition: color 0.3s;
+      display: block;
+    }
+
+    .mobile-menu a:hover { color: var(--gold-light); }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 998;
+      display: none;
+    }
+
+    .mobile-overlay.open { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" id="site-header">
+    <a href="#hero" class="logo">
+      <span class="logo-main">Café Guarany</span>
+      <span class="logo-sub">Porto · Since 1933</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#visit" class="nav-reserve">Reserve a Table</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-nav-link">Our Story</a>
+    <a href="#experience" class="mobile-nav-link">Experience</a>
+    <a href="#menu" class="mobile-nav-link">Menu</a>
+    <a href="#gallery" class="mobile-nav-link">Gallery</a>
+    <a href="#visit" class="mobile-nav-link">Visit Us</a>
+    <a href="#visit" class="mobile-nav-link" style="color: var(--gold-light); margin-top: 1rem;">Reserve a Table</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Café Restaurante Guarany &nbsp;·&nbsp; Porto, Portugal</span>
+      <h1 class="hero-title">Since 1933.<br><span>The Soul of Porto.</span></h1>
+      <p class="hero-subtitle">Where history, music, and the finest coffee meet on Avenida dos Aliados.</p>
+      <div class="hero-cta-group">
+        <a href="#visit" class="btn-primary">Reserve a Table</a>
+        <a href="#about" class="btn-secondary">Discover Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section-pad" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-image-wrap reveal">
+          <div class="about-year-badge">
+            <span class="since">Since</span>
+            <span class="year">1933</span>
+          </div>
+          <img
+            class="about-img-main"
+            src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=700&q=85&auto=format&fit=crop"
+            alt="Historic café interior with marble details"
+            loading="lazy"
+          />
+          <img
+            class="about-img-accent"
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=85&auto=format&fit=crop"
+            alt="Espresso coffee at Café Guarany"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="about-text reveal reveal-delay-2">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title">A Heritage Carved<br>in <em>Marble and Memory</em></h2>
+          <div class="divider"></div>
+
+          <p>On January 20th, 1933, Porto gained one of its most beloved institutions. Café Guarany opened its doors on Avenida dos Aliados, designed by architect Rogério de Azevedo and adorned with a striking marble relief of a South American Indian by sculptor Henrique Moreira.</p>
+
+          <p>The name pays homage to the Guaraní people of Paraguay, Brazil, and Uruguay, evoking the deep connection between South America and the world of coffee. Brazil, the planet's leading coffee producer, inspired the café's identity from the very beginning.</p>
+
+          <div class="about-quote">
+            <p>"A place where every cup carries a century of conversation, culture, and song."</p>
+          </div>
+
+          <p>Known affectionately as <strong>O Café dos Músicos</strong> (The Musicians' Café), Guarany became a sanctuary for Porto's intellectuals, artists, and performers. The interior features a stunning triptych by celebrated artist Graça Morais on the main wall, warm golden tones, and the timeless elegance of marble throughout.</p>
+
+          <p>Thoughtfully restored in 2003 under the same stewardship that brought Café Majestic back to life in 1994, Guarany continues to honour its legacy while welcoming each new generation of guests.</p>
+
+          <div class="about-facts">
+            <div class="fact">
+              <span class="fact-number">91</span>
+              <span class="fact-label">Years of Heritage</span>
+            </div>
+            <div class="fact">
+              <span class="fact-number">1933</span>
+              <span class="fact-label">Founding Year</span>
+            </div>
+            <div class="fact">
+              <span class="fact-number">365</span>
+              <span class="fact-label">Days Open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience section-pad" id="experience">
+    <div class="container">
+      <div class="experience-header reveal">
+        <span class="section-label">The Guarany Experience</span>
+        <h2 class="section-title">Three Ways to <em>Savour the Day</em></h2>
+        <div class="divider divider-center"></div>
+      </div>
+
+      <div class="experience-grid">
+        <div class="exp-card reveal">
+          <img
+            class="exp-card-img"
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&auto=format&fit=crop"
+            alt="Morning coffee and pastries"
+            loading="lazy"
+          />
+          <div class="exp-card-overlay"></div>
+          <div class="exp-card-content">
+            <span class="exp-card-icon">☕</span>
+            <h3 class="exp-card-title">Morning Rituals</h3>
+            <p class="exp-card-desc">Begin your Porto morning the right way: a perfect galão, freshly baked pastéis de nata, and the gentle hum of a city coming to life outside.</p>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-1">
+          <img
+            class="exp-card-img"
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop"
+            alt="Fine dining lunch and dinner"
+            loading="lazy"
+          />
+          <div class="exp-card-overlay"></div>
+          <div class="exp-card-content">
+            <span class="exp-card-icon">🍽️</span>
+            <h3 class="exp-card-title">Lunch &amp; Dinner</h3>
+            <p class="exp-card-desc">From the legendary Francesinha to tender bacalhau and slow-braised meats, our kitchen honours the soul of Portuguese cuisine with every plate.</p>
+          </div>
+        </div>
+
+        <div class="exp-card reveal reveal-delay-2">
+          <img
+            class="exp-card-img"
+            src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop"
+            alt="Live music performance"
+            loading="lazy"
+          />
+          <div class="exp-card-overlay"></div>
+          <div class="exp-card-content">
+            <span class="exp-card-icon">🎶</span>
+            <h3 class="exp-card-title">Live Music &amp; Events</h3>
+            <p class="exp-card-desc">As the Musicians' Café, Guarany pulses with live performances, cultural evenings, and the timeless tradition of fado echoing off marble walls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section section-pad" id="menu">
+    <div class="container">
+      <div class="menu-header reveal">
+        <span class="section-label">Our Menu</span>
+        <h2 class="section-title">Tastes of <em>Portugal</em></h2>
+        <div class="divider divider-center"></div>
+        <p style="max-width: 540px; margin: 0 auto; color: var(--text-muted); font-size: 0.92rem;">From the first sip of morning coffee to a candlelit dinner, every dish and drink carries the flavours and stories of Porto.</p>
+      </div>
+
+      <div class="menu-tabs">
+        <button class="menu-tab active" data-tab="breakfast">Breakfast</button>
+        <button class="menu-tab" data-tab="lunch">Lunch</button>
+        <button class="menu-tab" data-tab="dinner">Dinner</button>
+      </div>
+
+      <!-- BREAKFAST -->
+      <div class="menu-panel active" id="tab-breakfast">
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Galão</div>
+              <div class="menu-item-desc">Espresso with warm frothy milk, Portugal's beloved morning coffee</div>
+            </div>
+            <div class="menu-item-price">€1.80</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Pastel de Nata</div>
+              <div class="menu-item-desc">Flaky custard tart, dusted with cinnamon and powdered sugar</div>
+            </div>
+            <div class="menu-item-price">€1.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Torrada com Manteiga</div>
+              <div class="menu-item-desc">Thick sliced golden toast with fine Portuguese butter</div>
+            </div>
+            <div class="menu-item-price">€2.20</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Bica</div>
+              <div class="menu-item-desc">Short, intense espresso, the heartbeat of Porto mornings</div>
+            </div>
+            <div class="menu-item-price">€0.90</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Pão de Deus</div>
+              <div class="menu-item-desc">Sweet coconut-topped bread roll, soft and aromatic</div>
+            </div>
+            <div class="menu-item-price">€1.40</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Meias de Seda</div>
+              <div class="menu-item-desc">Espresso with condensed milk, creamy and indulgent</div>
+            </div>
+            <div class="menu-item-price">€1.60</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LUNCH -->
+      <div class="menu-panel" id="tab-lunch">
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Bifana</div>
+              <div class="menu-item-desc">Marinated pork on a crusty roll with mustard and spiced sauce</div>
+            </div>
+            <div class="menu-item-price">€4.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Bacalhau à Brás</div>
+              <div class="menu-item-desc">Salt cod with shoestring potatoes, scrambled egg and black olives</div>
+            </div>
+            <div class="menu-item-price">€13.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Caldo Verde</div>
+              <div class="menu-item-desc">Classic kale soup with chouriço, the warmth of northern Portugal</div>
+            </div>
+            <div class="menu-item-price">€5.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Prego no Pão</div>
+              <div class="menu-item-desc">Garlic-marinated beef steak in a crusty bread roll</div>
+            </div>
+            <div class="menu-item-price">€6.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Salada de Polvo</div>
+              <div class="menu-item-desc">Tender octopus salad with olive oil, parsley, and red onion</div>
+            </div>
+            <div class="menu-item-price">€9.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Sopa do Dia</div>
+              <div class="menu-item-desc">Chef's daily soup, made fresh each morning with seasonal ingredients</div>
+            </div>
+            <div class="menu-item-price">€3.80</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DINNER -->
+      <div class="menu-panel" id="tab-dinner">
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Francesinha</div>
+              <div class="menu-item-desc">Porto's iconic layered sandwich with meats, melted cheese, and spiced beer sauce</div>
+            </div>
+            <div class="menu-item-price">€14.00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Bacalhau com Natas</div>
+              <div class="menu-item-desc">Salt cod baked with cream, potatoes, and a golden crust</div>
+            </div>
+            <div class="menu-item-price">€15.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Carne de Porco à Alentejana</div>
+              <div class="menu-item-desc">Pork with clams, fried potatoes, coriander, and white wine</div>
+            </div>
+            <div class="menu-item-price">€16.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Arroz de Pato</div>
+              <div class="menu-item-desc">Slow-cooked duck rice baked with chouriço and herbs</div>
+            </div>
+            <div class="menu-item-price">€14.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Pastel de Feijão</div>
+              <div class="menu-item-desc">Delicate bean pastry from Torres Vedras, a Portuguese sweet tradition</div>
+            </div>
+            <div class="menu-item-price">€2.50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Leite Creme</div>
+              <div class="menu-item-desc">Portugal's classic burnt cream custard with caramelised sugar crust</div>
+            </div>
+            <div class="menu-item-price">€4.50</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="menu-note">Seasonal menu. Prices include VAT. Full menu available at the café.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-header reveal">
+      <span class="section-label">The Atmosphere</span>
+      <h2 class="section-title">Inside <em>Guarany</em></h2>
+      <div class="divider divider-center"></div>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=900&q=85&auto=format&fit=crop"
+          alt="Historic café interior, warm golden light"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1606791422814-b32c705e3e2f?w=600&q=80&auto=format&fit=crop"
+          alt="Marble café detail"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=600&q=80&auto=format&fit=crop"
+          alt="Espresso coffee cup"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80&auto=format&fit=crop"
+          alt="Elegant restaurant dining"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop"
+          alt="Porto architecture on Avenida dos Aliados"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img
+          src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80&auto=format&fit=crop"
+          alt="Fresh pastéis de nata"
+          loading="lazy"
+        />
+        <div class="gallery-overlay">
+          <span class="gallery-overlay-icon">✦</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <h2 class="cta-band-title">Join Us at the Heart of Porto</h2>
+    <p class="cta-band-sub">Open every day from 8:00 to 23:00. No reason needed to visit a legend.</p>
+    <a href="#visit" class="btn-dark">Plan Your Visit</a>
+  </div>
+
+  <!-- VISIT -->
+  <section class="visit section-pad" id="visit">
+    <div class="container">
+      <div class="visit-inner">
+        <div class="visit-info reveal">
+          <span class="section-label">Find Us</span>
+          <h2 class="section-title">Visit <em>Café Guarany</em></h2>
+          <div class="divider"></div>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon">📍</span>
+              <div>
+                <div class="contact-label">Address</div>
+                <div class="contact-value">Avenida dos Aliados, 85/89<br>4000-066 Porto, Portugal</div>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">📞</span>
+              <div>
+                <div class="contact-label">Phone</div>
+                <div class="contact-value"><a href="tel:+351223321272">+351 223 321 272</a></div>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">✉️</span>
+              <div>
+                <div class="contact-label">Email</div>
+                <div class="contact-value"><a href="mailto:guarany@mail.telepac.pt">guarany@mail.telepac.pt</a></div>
+              </div>
+            </li>
+            <li>
+              <span class="contact-icon">🕐</span>
+              <div>
+                <div class="contact-label">Opening Hours</div>
+                <div class="hours-grid">
+                  <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">8:00 – 23:00</span></div>
+                  <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">8:00 – 23:00</span></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="map-container reveal reveal-delay-2">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.2985329185756!2d-8.613815!3d41.149059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2464b6c35e0f41%3A0x1bd7bc9f50fcaf0!2sCaf%C3%A9%20Guarany!5e0!3m2!1sen!2spt!4v1711000000000!5m2!1sen!2spt"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Café Guarany on Google Maps"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-main" style="color: var(--white);">Café Guarany</span>
+          <span class="logo-sub" style="display: block; margin-bottom: 1rem;">Porto · Since 1933</span>
+          <p>A heritage institution on Avenida dos Aliados. Where Porto gathers to taste, to talk, and to listen to the music of life.</p>
+          <div class="footer-social">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigate</h4>
+          <ul class="footer-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#experience">The Experience</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#visit">Visit Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+351223321272">+351 223 321 272</a></li>
+            <li><a href="mailto:guarany@mail.telepac.pt">guarany@mail.telepac.pt</a></li>
+            <li style="color: rgba(250,250,247,0.6); font-size: 0.85rem; padding-top: 0.5rem;">Av. dos Aliados, 85/89<br>4000-066 Porto, Portugal</li>
+          </ul>
+          <div style="margin-top: 1.5rem;">
+            <h4 class="footer-col-title">Hours</h4>
+            <p style="font-size: 0.85rem; color: rgba(250,250,247,0.6);">Monday to Sunday<br><strong style="color: var(--gold-light);">8:00 – 23:00</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2024 Café Restaurante Guarany. All rights reserved.</p>
+        <p class="footer-badge">
+          <span>Demo created by</span>
+          <a href="https://jams.zone" target="_blank" rel="noopener">jams.zone</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header on scroll
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Menu tabs
+    const tabs = document.querySelectorAll('.menu-tab');
+    const panels = document.querySelectorAll('.menu-panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+    }
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      mobileOverlay.classList.toggle('open');
+    });
+
+    mobileOverlay.addEventListener('click', closeMobile);
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobile);
+    });
+
+    // Parallax hero
+    const heroBg = document.getElementById('hero-bg');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight) {
+        heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.25}px)`;
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
